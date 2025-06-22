@@ -13,15 +13,17 @@ userRouter.use(authMiddleware);
 userRouter.post(
   "/api/events",
   upload.array("images", 5),
-  eventController.create
+  eventController.create,
 );
 userRouter.put(
   "/api/events/:id",
   upload.array("images", 5),
-  eventController.edit
+  eventController.edit,
 );
 userRouter.delete("/api/events/:id", eventController.remove);
 userRouter.get("/api/events", eventController.get);
+userRouter.post("/api/event/type", eventController.createEventType);
+userRouter.get("/api/events/type", eventController.getEventType);
 
 // prayer
 userRouter.get("/api/prayer", prayerControler.get);
@@ -36,8 +38,8 @@ userRouter.put("/api/accounts/:id", accountController.edit);
 userRouter.delete("/api/accounts/:id", accountController.remove);
 
 // transactions
-userRouter.get("/api/transactions", transactionControllers.get)
-userRouter.post("/api/transactions", transactionControllers.create)
+userRouter.get("/api/transactions", transactionControllers.get);
+userRouter.post("/api/transactions", transactionControllers.create);
 userRouter.put("/api/transactions/:id", transactionControllers.edit);
 userRouter.delete("/api/transactions/:id", transactionControllers.remove);
 

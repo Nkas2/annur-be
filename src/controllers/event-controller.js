@@ -22,7 +22,7 @@ const create = async (req, res, next) => {
     const result = await eventService.create(
       req.body || {},
       req.user,
-      req.files
+      req.files,
     );
     res.status(200).json({
       data: result,
@@ -59,9 +59,33 @@ const remove = async (req, res, next) => {
   }
 };
 
+const createEventType = async (req, res, next) => {
+  try {
+    const result = await eventService.createEventType(req.body);
+    res.status(200).json({
+      data: result,
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
+const getEventType = async (req, res, next) => {
+  try {
+    const result = await eventService.getEventType();
+    res.status(200).json({
+      data: result,
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
 export default {
   get,
   create,
   edit,
   remove,
+  createEventType,
+  getEventType,
 };

@@ -125,9 +125,23 @@ const remove = async (request) => {
   });
 };
 
+const createEventType = async (request) => {
+  return prismaClient.eventType.create({
+    data: {
+      name: request.title,
+    },
+  });
+};
+
+const getEventType = async () => {
+  return prismaClient.eventType.findMany({});
+};
+
 export default {
   get,
   create,
   edit,
   remove,
+  createEventType,
+  getEventType,
 };
