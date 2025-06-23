@@ -155,6 +155,16 @@ const getIncomeAndExpense = async () => {
   return { income, expenses, total };
 };
 
+const getTransactionDetails = async (id) => {
+  const trans = await prismaClient.transactions.findFirst({
+    where: {
+      id: id,
+    },
+  });
+
+  return trans;
+};
+
 export default {
   get,
   create,
@@ -162,4 +172,5 @@ export default {
   remove,
   getListTransactions,
   getIncomeAndExpense,
+  getTransactionDetails,
 };

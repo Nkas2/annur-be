@@ -40,6 +40,10 @@ userRouter.get("/api/role/accounts", accountController.getRole);
 
 // transactions
 userRouter.get("/api/transactions", transactionControllers.get);
+userRouter.get(
+  "/api/transactions/:id",
+  transactionControllers.getTransactionDetail,
+);
 userRouter.post("/api/transactions", transactionControllers.create);
 userRouter.put("/api/transactions/:id", transactionControllers.edit);
 userRouter.delete("/api/transactions/:id", transactionControllers.remove);
