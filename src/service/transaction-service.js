@@ -106,7 +106,8 @@ const getIncomeAndExpense = async () => {
   const expenses =
     result.find((r) => r.transaction_type === "expenses")?._sum.amount ?? 0;
 
-  const total = income - expenses;
+  let total = income - expenses;
+  total = total.toString();
 
   return { income, expenses, total };
 };
