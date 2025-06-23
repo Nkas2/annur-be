@@ -89,8 +89,47 @@ const remove = async (request) => {
   });
 };
 
-const getListTransactions = async () => {
+const getListTransactions = async (year, month) => {
+  const where = {};
+
+  // Filter berdasarkan tahun
+  if (year && year !== "all") {
+    const parsedYear = parseInt(year);
+    if (!isNaN(parsedYear)) {
+      where.date = {
+        ...where.date,
+        gte: new Date(parsedYear, 0, 1),
+        lte: new Date(parsedYear, 11, 31, 23, 59, 59, 999),
+      };
+    }
+  }
+
+  // Filter berdasarkan bulan (jika bukan 0)
+  if (month && month !== 0) {
+    const parsedMonth = month - 1; // karena bulan di Date dimulai dari 0 (Januari = 0)
+    const from = new Date(
+      year && year !== "all" ? parseInt(year) : new Date().getFullYear(),
+      parsedMonth,
+      1,
+    );
+    const to = new Date(
+      from.getFullYear(),
+      from.getMonth() + 1,
+      0,
+      23,
+      59,
+      59,
+      999,
+    );
+
+    where.date = {
+      gte: from,
+      lte: to,
+    };
+  }
+
   return prismaClient.transactions.findMany({
+    where,
     orderBy: {
       date: "desc",
     },
