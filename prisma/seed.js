@@ -24,6 +24,12 @@ async function main() {
     create: { name: "admin" },
   });
 
+  await prisma.role.upsert({
+    where: { name: "bendahara" },
+    update: {},
+    create: { name: "bendahara" },
+  });
+
   await prisma.user.upsert({
     where: {
       email: "admin@example.com", // pastikan ini unique di schema
