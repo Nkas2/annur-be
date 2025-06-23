@@ -93,10 +93,27 @@ const getListTransactions = async () => {
   return prismaClient.transactions.findMany({});
 };
 
+const getIncomeAndExpense = async () => {
+  const result = await prisma.transactions.groupBy({
+    by: ["transaction_type"],
+    _sum: {
+      amount: true,
+    },
+  });
+
+  const income =
+    result.find((r) => r.transaction_type === "income")?._sum.amount ?? 0;
+  const expenses =
+    result.find((r) => r.transaction_type === "expenses")?._sum.amount ?? 0;
+
+  return { income, expenses };
+};
+
 export default {
   get,
   create,
   edit,
   remove,
   getListTransactions,
+  getIncomeAndExpense,
 };

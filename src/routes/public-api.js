@@ -11,4 +11,9 @@ publicRoutes.get(
   transactionControllers.getListTransactions,
 );
 
+publicRoutes.get(
+  "/api/ince/transactions",
+  transactionControllers.getIncomeAndExpense,
+);
+
 export { publicRoutes };

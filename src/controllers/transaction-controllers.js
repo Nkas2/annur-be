@@ -59,10 +59,22 @@ const getListTransactions = async (req, res, next) => {
   }
 };
 
+const getIncomeAndExpense = async (req, res, next) => {
+  try {
+    const result = await transactionService.getIncomeAndExpense();
+    res.status(200).json({
+      data: result,
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
 export default {
   get,
   create,
   edit,
   remove,
   getListTransactions,
+  getIncomeAndExpense,
 };
