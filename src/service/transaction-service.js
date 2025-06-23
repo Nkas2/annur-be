@@ -94,7 +94,7 @@ const getListTransactions = async () => {
 };
 
 const getIncomeAndExpense = async () => {
-  const result = await prisma.transactions.groupBy({
+  const result = await prismaClient.transactions.groupBy({
     by: ["transaction_type"],
     _sum: {
       amount: true,
