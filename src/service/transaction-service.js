@@ -92,7 +92,7 @@ const remove = async (request) => {
 const getListTransactions = async () => {
   return prismaClient.transactions.findMany({
     orderBy: {
-      date: "desc",
+      date: "asc",
     },
   });
 };
