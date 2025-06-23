@@ -158,7 +158,7 @@ const getIncomeAndExpense = async () => {
 const getTransactionDetails = async (id) => {
   const trans = await prismaClient.transactions.findFirst({
     where: {
-      id: id,
+      id: parseInt(id),
     },
   });
 
