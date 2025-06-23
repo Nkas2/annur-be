@@ -36,6 +36,7 @@ userRouter.get("/api/accounts", accountController.get);
 userRouter.post("/api/accounts", accountController.create);
 userRouter.put("/api/accounts/:id", accountController.edit);
 userRouter.delete("/api/accounts/:id", accountController.remove);
+userRouter.delete("/api/role/accounts", accountController.getRole);
 
 // transactions
 userRouter.get("/api/transactions", transactionControllers.get);
