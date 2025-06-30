@@ -178,6 +178,16 @@ const getEventList = async (year, month) => {
   });
 };
 
+const getEventDetails = async (id) => {
+  const event = await prismaClient.event.findFirst({
+    where: {
+      id: parseInt(id),
+    },
+  });
+
+  return event;
+};
+
 export default {
   get,
   create,
@@ -186,4 +196,5 @@ export default {
   createEventType,
   getEventType,
   getEventList,
+  getEventDetails,
 };

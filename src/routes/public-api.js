@@ -17,5 +17,6 @@ publicRoutes.get(
 );
 
 publicRoutes.get("/api/list/events", eventController.getEventList);
+publicRoutes.get("/api/event/details/:id", eventController.getEventDetail);
 
 export { publicRoutes };

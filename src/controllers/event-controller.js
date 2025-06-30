@@ -1,4 +1,5 @@
 import eventService from "../service/event-service.js";
+import transactionService from "../service/transaction-service.js";
 
 const get = async (req, res, next) => {
   try {
@@ -105,6 +106,17 @@ const getEventList = async (req, res, next) => {
   }
 };
 
+const getEventDetail = async (req, res, next) => {
+  try {
+    const result = await eventService.getEventDetails(req.params.id);
+    res.status(200).json({
+      data: result,
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
 export default {
   get,
   create,
@@ -113,4 +125,5 @@ export default {
   createEventType,
   getEventType,
   getEventList,
+  getEventDetail,
 };
