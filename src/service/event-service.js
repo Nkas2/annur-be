@@ -137,6 +137,47 @@ const getEventType = async () => {
   return prismaClient.eventType.findMany({});
 };
 
+const getEventList = async (year, month) => {
+  const where = {};
+
+  // Inisialisasi kondisi event_start
+  let gte, lte;
+
+  // Filter berdasarkan tahun
+  if (year && year !== "all") {
+    const parsedYear = parseInt(year);
+    if (!isNaN(parsedYear)) {
+      gte = new Date(parsedYear, 0, 1); // 1 Jan, jam 00:00:00
+      lte = new Date(parsedYear, 11, 31, 23, 59, 59, 999); // 31 Des, jam 23:59:59
+    }
+  }
+
+  // Filter berdasarkan bulan (jika bukan 0)
+  if (month && month !== 0) {
+    const parsedMonth = month - 1;
+    const yearToUse =
+      year && year !== "all" ? parseInt(year) : new Date().getFullYear();
+
+    gte = new Date(yearToUse, parsedMonth, 1);
+    lte = new Date(yearToUse, parsedMonth + 1, 0, 23, 59, 59, 999);
+  }
+
+  // Set filter kalau ada batas waktu
+  if (gte && lte) {
+    where.event_start = {
+      gte,
+      lte,
+    };
+  }
+
+  return prismaClient.event.findMany({
+    where,
+    orderBy: {
+      event_start: "desc",
+    },
+  });
+};
+
 export default {
   get,
   create,
@@ -144,4 +185,5 @@ export default {
   remove,
   createEventType,
   getEventType,
+  getEventList,
 };

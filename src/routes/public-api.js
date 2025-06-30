@@ -16,4 +16,6 @@ publicRoutes.get(
   transactionControllers.getIncomeAndExpense,
 );
 
+publicRoutes.get("/api/list/events", eventController.getEventList);
+
 export { publicRoutes };

@@ -81,6 +81,17 @@ const getEventType = async (req, res, next) => {
   }
 };
 
+const getEventList = async (req, res, next) => {
+  try {
+    const result = await eventService.getEventList();
+    res.status(200).json({
+      data: result,
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
 export default {
   get,
   create,
@@ -88,4 +99,5 @@ export default {
   remove,
   createEventType,
   getEventType,
+  getEventList,
 };
