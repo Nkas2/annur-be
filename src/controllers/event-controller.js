@@ -83,7 +83,20 @@ const getEventType = async (req, res, next) => {
 
 const getEventList = async (req, res, next) => {
   try {
-    const result = await eventService.getEventList();
+    const { year: rawYear, month: rawMonth } = req.query;
+
+    // Default fallback
+    const now = new Date();
+    const year =
+      typeof rawYear === "string" && rawYear !== "" ? rawYear : "all";
+    const month =
+      typeof rawMonth === "string" && rawMonth !== "" ? Number(rawMonth) : 0;
+
+    // Optional: validasi basic
+    if (Number.isNaN(month) || month < 0 || month > 12) {
+      return res.status(400).json({ message: "Invalid month value" });
+    }
+    const result = await eventService.getEventList(year, month);
     res.status(200).json({
       data: result,
     });
