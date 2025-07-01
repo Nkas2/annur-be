@@ -61,10 +61,35 @@ const getRole = async (req, res, next) => {
   }
 };
 
+const getUserList = async (req, res, next) => {
+  try {
+    const result = await accountService.getUserList();
+    res.status(200).json({
+      data: result,
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
+const getUserDetail = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const result = await accountService.getUserDetails(id);
+    res.status(200).json({
+      data: result,
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
 export default {
   get,
   create,
   edit,
   remove,
   getRole,
+  getUserList,
+  getUserDetail,
 };

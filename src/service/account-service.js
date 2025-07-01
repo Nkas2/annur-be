@@ -128,10 +128,31 @@ const getRole = async () => {
   return prismaClient.role.findMany({});
 };
 
+const getUserList = async () => {
+  return prismaClient.user.findMany({
+    include: {
+      roles: true,
+    },
+  });
+};
+
+const getUserDetails = async (id) => {
+  return prismaClient.user.findFirst({
+    where: {
+      id: parseInt(id),
+    },
+    include: {
+      roles: true,
+    },
+  });
+};
+
 export default {
   get,
   create,
   edit,
   remove,
   getRole,
+  getUserList,
+  getUserDetails,
 };
