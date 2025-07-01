@@ -46,6 +46,7 @@ model User {
   image_profile Image?
   name          String   @db.VarChar(100)
   token         String?  @db.VarChar(255)
+  state         Boolean  @default(true)
 
   event           Event[]
   prayer_schedule PrayerSchedule[]

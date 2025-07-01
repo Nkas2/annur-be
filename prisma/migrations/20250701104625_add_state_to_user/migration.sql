@@ -1,0 +1,17 @@
+/*
+  Warnings:
+
+  - You are about to alter the column `event_start` on the `events` table. The data in that column could be lost. The data in that column will be cast from `DateTime(0)` to `DateTime`.
+  - You are about to alter the column `event_end` on the `events` table. The data in that column could be lost. The data in that column will be cast from `DateTime(0)` to `DateTime`.
+  - You are about to alter the column `schedule` on the `prayer_schedule` table. The data in that column could be lost. The data in that column will be cast from `DateTime(0)` to `DateTime`.
+
+*/
+-- AlterTable
+ALTER TABLE `events` MODIFY `event_start` DATETIME NOT NULL,
+    MODIFY `event_end` DATETIME NOT NULL;
+
+-- AlterTable
+ALTER TABLE `prayer_schedule` MODIFY `schedule` DATETIME NOT NULL;
+
+-- AlterTable
+ALTER TABLE `users` ADD COLUMN `state` BOOLEAN NOT NULL DEFAULT true;
