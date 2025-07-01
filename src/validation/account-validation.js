@@ -1,4 +1,4 @@
-import Joi from "joi";
+import Joi, { allow } from "joi";
 
 const createAccountValidation = Joi.object({
   username: Joi.string().required(),
@@ -12,6 +12,7 @@ const editAccountValidation = Joi.object({
   id: Joi.number().positive().required(),
   name: Joi.string().required(),
   email: Joi.string().email().required(),
+  password: Joi.string().optional().allow(null),
   role: Joi.number().positive().required(),
 });
 
