@@ -124,9 +124,12 @@ const remove = async (request, user) => {
     throw new ResponseError(404, "User not found");
   }
 
-  return prismaClient.user.delete({
+  return prismaClient.user.update({
     where: {
       id: request.id,
+    },
+    data: {
+      state: false,
     },
   });
 };
@@ -139,6 +142,9 @@ const getUserList = async () => {
   return prismaClient.user.findMany({
     include: {
       roles: true,
+    },
+    where: {
+      state: true,
     },
   });
 };
