@@ -39,7 +39,9 @@ const login = async (request) => {
       token: true,
       role: true,
       roles: {
-        name: true,
+        select: {
+          name: true,
+        },
       },
     },
   });
