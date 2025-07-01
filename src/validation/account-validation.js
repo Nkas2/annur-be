@@ -1,4 +1,4 @@
-import Joi, { allow } from "joi";
+import Joi from "joi";
 
 const createAccountValidation = Joi.object({
   username: Joi.string().required(),
