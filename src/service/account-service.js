@@ -76,20 +76,27 @@ const edit = async (request, user) => {
     throw new ResponseError(404, "User not found");
   }
 
+  // Buat data update
+  const updateData = {
+    name: request.name,
+    email: request.email,
+    roles: {
+      connect: {
+        id: request.role,
+      },
+    },
+  };
+
+  // Tambahkan password jika ada
+  if (request.password) {
+    updateData.password = await bcrypt.hash(request.password, 10);
+  }
+
   return prismaClient.user.update({
     where: {
       id: request.id,
     },
-    data: {
-      name: request.name,
-      roles: {
-        connect: {
-          id: request.role,
-        },
-      },
-      email: request.email,
-      password: await bcrypt.hash(request.password, 10),
-    },
+    data: updateData,
     include: {
       roles: {
         select: {
