@@ -12,7 +12,6 @@ const editAccountValidation = Joi.object({
   id: Joi.number().positive().required(),
   name: Joi.string().required(),
   email: Joi.string().email().required(),
-  password: Joi.string().optional(),
   role: Joi.number().positive().required(),
 });
 
