@@ -4,6 +4,7 @@ import { errorMiddleware } from "../middleware/error-middleware.js";
 import path from "path";
 import { fileURLToPath } from "url";
 import { userRouter } from "../routes/api.js";
+import transactionControllers from "../controllers/transaction-controllers.js";
 
 export const web = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -16,6 +17,8 @@ web.get("/", (req, res, next) => {
 
 web.use("/upload", express.static(path.join(__dirname, "../../uploads")));
 
+web.post("/generate-report", transactionControllers.generateReportManual);
+web.get("/download-report/:year/:month", transactionControllers.downloadReport);
 web.use(publicRoutes);
 web.use(userRouter);
 
