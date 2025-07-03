@@ -89,7 +89,7 @@ const remove = async (request) => {
   });
 };
 
-const getListTransactions = async (year, month) => {
+const getListTransactions = async (year, month, typeAction) => {
   const where = {};
 
   // Filter berdasarkan tahun
@@ -128,6 +128,11 @@ const getListTransactions = async (year, month) => {
     };
   }
 
+  if (typeAction && typeAction === "Pemasukan") {
+    where.transaction_type = "income";
+  } else if (typeAction && typeAction === "Pengeluaran") {
+    where.transaction_type = "expenses";
+  }
   return prismaClient.transactions.findMany({
     where,
     orderBy: {
