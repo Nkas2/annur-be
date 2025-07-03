@@ -52,6 +52,8 @@ const getListTransactions = async (req, res, next) => {
   try {
     const { year: rawYear, month: rawMonth, type: typeAction } = req.query;
 
+    console.log(req.query);
+
     // Default fallback
     const now = new Date();
     const year =
